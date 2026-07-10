@@ -110,7 +110,7 @@
             justify-content: center; 
         }
 
-        /* New background photo layer - Moody Dark Abstract Photography */
+        /* Background photo layer - Moody Dark Abstract Photography */
         .hero-parallax-bg {
             position: absolute;
             top: 0;
@@ -628,8 +628,9 @@
         </div>
 
         <div class="portfolio-grid">
+            <!-- The preview thumbnail dynamically pulls the initial lead shot from Portraits collection -->
             <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
-                <img src="https://i.imgur.com/lJ24npb.jpeg" alt="Portrait by uzzysnaps">
+                <img src="https://i.imgur.com/jLoPRqS.jpeg" alt="Portrait by uzzysnaps">
                 <div class="grid-item-info">
                     <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
                 </div>
@@ -733,6 +734,7 @@
         // Master Consolidated Photo Database
         const galleryData = {
             portraits: [
+                "https://i.imgur.com/jLoPRqS.jpeg",
                 "https://i.imgur.com/lJ24npb.jpeg",
                 "https://i.imgur.com/B8lXCMY.jpeg",
                 "https://i.imgur.com/p5AEJhh.jpeg",
