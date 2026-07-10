@@ -250,9 +250,10 @@
                         border-color 0.4s ease;
         }
 
+        /* Implementation of Recommendation #2: Smooth internal zoom + subtle lift */
         .grid-item:hover {
-            transform: scale(1.01) !important;
-            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px) scale(1.01) !important;
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .grid-item.reveal {
@@ -264,7 +265,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.3s ease-in-out;
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-in-out;
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.05);
         }
 
         .grid-item-info {
@@ -275,6 +280,7 @@
             padding: 24px;
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
             pointer-events: none;
+            z-index: 2;
         }
 
         .grid-item-tag {
@@ -293,6 +299,11 @@
             letter-spacing: 0;
             margin-top: 4px;
             display: block;
+            transition: color 0.2s ease;
+        }
+
+        .grid-item:hover .tap-hint {
+            color: var(--text-primary);
         }
 
         /* --- IMMERSIVE LIQUID GLASS LIGHTBOX UI COMPONENT --- */
@@ -470,6 +481,15 @@
         }
 
         /* About & Vision Layout */
+        .vision-meta {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
         .about-text {
             color: var(--text-secondary);
             max-width: 820px;
@@ -558,8 +578,10 @@
         .social-row {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 30px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .social-icon-link {
@@ -628,7 +650,6 @@
         </div>
 
         <div class="portfolio-grid">
-            <!-- The preview thumbnail dynamically pulls the initial lead shot from Portraits collection -->
             <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
                 <img src="https://i.imgur.com/jLoPRqS.jpeg" alt="Portrait by uzzysnaps">
                 <div class="grid-item-info">
@@ -651,7 +672,7 @@
             </div>
 
             <div class="grid-item data-category" data-cat="random" onclick="openLightbox('random', 0)">
-                <img src="https://i.imgur.com/BjGzJV4.jpeg" alt="Random Series by uzzysnaps">
+                <img src="https://i.imgur.com/2W7XMf6.jpeg" alt="Random Series by uzzysnaps">
                 <div class="grid-item-info">
                     <div class="grid-item-tag">Random Series <span class="tap-hint">View Collection →</span></div>
                 </div>
@@ -680,9 +701,11 @@
         <div class="story-parallax-bg" id="storyBg"></div>
 
         <section id="vision" class="section" style="border-top: 1px solid var(--border-subtle);">
+            <!-- Implementation of Recommendation #3: Personal Artist Branding Line -->
+            <div class="vision-meta">By Uzzy — Visual Storyteller</div>
             <h2 class="section-title">The Vision</h2>
             <p class="about-text">
-                Photography shouldn't just record what happened; it should make you feel the weight of the air in the room. At <span><strong>uzzy</strong>snaps™</span>, every single frame is an open dialogue between <span>classical depth</span> and <span>modern texture</span>. We strip away the stiff, over-posed aesthetics of standard shoots to find something entirely real. By blending striking visual composition with a loose, technical fluidity, we capture raw human expressions, fleeting street energy, and natural landscapes, processing them into <span>absolute, high-fidelity art</span> that lingers long after you look away.
+                Photography shouldn't just record what happened; it should make you feel the weight of the air in the room. At <span><strong>uzzy</strong>snaps™</span>, every single frame is an open dialogue between <span>classical depth</span> and <span>modern texture</span>. We strip away the stiff, over-posed aesthetics of standard shoots to find something entirely real. By blending striking visual composition with a loose, technical fluidity, we capture raw human expressions, fleeting street energy, and natural landscapes, processing them into <span>absolute, high-fidelity art</span> that lingers long after you look away. We capture raw narrative depth across Nigeria.
             </p>
         </section>
 
@@ -713,9 +736,11 @@
         <section id="contact" class="section" style="border-top: 1px solid var(--border-subtle); text-align: center;">
             <h2 class="section-title">Inquiries</h2>
             <div class="social-row">
+                <!-- Implementation of Recommendation #4: Direct Email Inquiries + Updated TikTok Handles -->
+                <a href="mailto:chibuzorevangel@gmail.com" class="social-icon-link">Email Brief</a>
                 <a href="https://wa.me/+2348080980969" class="social-icon-link" target="_blank">WhatsApp</a>
                 <a href="https://instagram.com" class="social-icon-link" target="_blank">Instagram</a>
-                <a href="https://tiktok.com" class="social-icon-link" target="_blank">TikTok</a>
+                <a href="https://www.tiktok.com/@thatguyevangel?_r=1&_t=ZS-97vI826oUbJ" class="social-icon-link" target="_blank">TikTok</a>
             </div>
         </section>
 
@@ -736,7 +761,7 @@
             portraits: [
                 "https://i.imgur.com/jLoPRqS.jpeg",
                 "https://i.imgur.com/lJ24npb.jpeg",
-                "https://i.imgur.com/yNOyLU7.jpeg", // Replaced third photo here
+                "https://i.imgur.com/yNOyLU7.jpeg", 
                 "https://i.imgur.com/p5AEJhh.jpeg",
                 "https://i.imgur.com/DjtXVmm.jpeg",
                 "https://i.imgur.com/KqlSn26.jpeg"
@@ -754,14 +779,14 @@
                 "https://i.imgur.com/omFIFVc.jpeg"
             ],
             random: [
+                "https://i.imgur.com/2W7XMf6.jpeg",
                 "https://i.imgur.com/BjGzJV4.jpeg",
                 "https://i.imgur.com/wWleUTM.jpeg",
                 "https://i.imgur.com/BGJiaGk.jpeg",
                 "https://i.imgur.com/FSjcxe4.jpeg",
-                "https://i.imgur.com/aMyBmXd.jpeg",
+                "https://i.imgur.com/aMyBmXd.jpeg", 
                 "https://i.imgur.com/nPUVcz6.jpeg", 
-                "https://i.imgur.com/Cl2VyOZ.jpeg", 
-                "https://i.imgur.com/2W7XMf6.jpeg"  
+                "https://i.imgur.com/Cl2VyOZ.jpeg"  
             ]
         };
 
