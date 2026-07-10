@@ -456,11 +456,17 @@
         }
 
         @media (max-width: 767px) {
-            .lightbox-nav-arrow { display: none; }
-            .lightbox-slider-container { height: 65vh; }
-            .lightbox-slide { padding: 0 12px; }
-            .lightbox-glow-orb-1 { width: 300px; height: 300px; }
-            .lightbox-glow-orb-2 { width: 320px; height: 320px; }
+            .nav-container { padding: 0 16px; }
+            nav {
+                max-width: calc(100% - 100px);
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                gap: 16px;
+            }
+            nav::-webkit-scrollbar { display: none; }
+            .nav-link { padding: 14px 4px; }
+            .section { padding: 80px 16px; }
+            .hero-title { letter-spacing: 0.02em; }
         }
 
         /* About & Vision Layout */
@@ -585,20 +591,6 @@
         footer strong {
             font-weight: 500;
         }
-
-        @media (max-width: 767px) {
-            .nav-container { padding: 0 16px; }
-            nav {
-                max-width: calc(100% - 100px);
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                gap: 16px;
-            }
-            nav::-webkit-scrollbar { display: none; }
-            .nav-link { padding: 14px 4px; }
-            .section { padding: 80px 16px; }
-            .hero-title { letter-spacing: 0.02em; }
-        }
     </style>
 </head>
 <body>
@@ -637,7 +629,7 @@
 
         <div class="portfolio-grid">
             <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
-                <img src="https://i.imgur.com/B8lXCMY.jpeg" alt="Portrait by uzzysnaps">
+                <img src="https://i.imgur.com/lJ24npb.jpeg" alt="Portrait by uzzysnaps">
                 <div class="grid-item-info">
                     <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
                 </div>
@@ -741,6 +733,7 @@
         // Master Consolidated Photo Database
         const galleryData = {
             portraits: [
+                "https://i.imgur.com/lJ24npb.jpeg",
                 "https://i.imgur.com/B8lXCMY.jpeg",
                 "https://i.imgur.com/p5AEJhh.jpeg",
                 "https://i.imgur.com/DjtXVmm.jpeg",
