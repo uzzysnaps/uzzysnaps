@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -23,6 +23,35 @@
             --glass-specular: inset 0 1.5px 2px rgba(255, 255, 255, 0.25), 0 12px 40px rgba(0, 0, 0, 0.6);
         }
 
+        /* --- STATUS BADGE STYLING --- */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #34c759;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7);
+            animation: statusPulse 1.8s infinite;
+        }
+
+        @keyframes statusPulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+        }
+
+        /* --- CORE PAGE STYLES --- */
         * {
             margin: 0;
             padding: 0;
@@ -42,7 +71,6 @@
             overflow-x: hidden;
         }
 
-        /* Apple Ultraclean Blurred Header with visible Liquid Glass */
         header {
             position: fixed;
             top: 0;
@@ -99,34 +127,43 @@
             color: var(--text-primary);
         }
 
-        /* Centered Cinematic Motion Hero with Immersive Background Photo */
-        .hero-container {
+        /* UNIFIED HERO & GALLERY CONTAINER */
+        .upper-showcase-wrapper {
             position: relative;
-            height: 100vh;
             width: 100%;
             overflow: hidden;
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
+            background-color: var(--bg-pure);
         }
 
-        /* Background photo layer - Moody Dark Abstract Photography */
         .hero-parallax-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 140%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,1) 100%), 
+            height: 100%; 
+            background: linear-gradient(to bottom, 
+                            rgba(0, 0, 0, 0.45) 0%, 
+                            rgba(0, 0, 0, 0.55) 40%, 
+                            rgba(0, 0, 0, 0.92) 85%, 
+                            rgba(0, 0, 0, 1) 100%), 
                         url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1920') no-repeat center center;
             background-size: cover;
+            background-attachment: fixed;
             z-index: 1;
-            will-change: transform;
+        }
+
+        .hero-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            z-index: 2;
         }
 
         .hero-content {
             text-align: center;
-            z-index: 2;
             position: relative;
             padding: 0 20px;
             width: 100%;
@@ -139,56 +176,44 @@
             font-weight: 600;
             letter-spacing: 0.05em;
             line-height: 1.15;
-            background: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #d2d2d7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
         }
 
         .hero-subtitle {
             font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 500;
+            color: #f5f5f7; 
+            font-weight: 600; 
             letter-spacing: 0.25em;
             text-transform: uppercase;
             margin-bottom: 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
         .hero-established {
             font-size: 10px;
             color: var(--text-secondary);
-            font-weight: 400;
+            font-weight: 500; 
             letter-spacing: 0.15em;
         }
 
-        /* Lower Wrapper Area */
-        .lower-story-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            background-color: #000;
-        }
-
-        .story-parallax-bg {
-            position: absolute;
-            top: -10%;
-            left: 0;
-            width: 100%;
-            height: 120%;
-            background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,1) 100%), 
-                        url('https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1920') no-repeat center center;
-            background-size: cover;
-            z-index: 1;
-            opacity: 0.52;
-            will-change: transform;
-        }
-
-        /* Apple Section Layout */
-        .section {
-            max-width: 1024px;
-            margin: 0 auto;
-            padding: 100px 22px;
+        /* GALLERY SECTION WITH SMOOTH BLUR LAYER */
+        .section.gallery-section {
+            max-width: 100%;
+            padding: 100px 0;
             position: relative;
             z-index: 5;
+            background-color: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .gallery-inner-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 22px;
         }
 
         .section-title {
@@ -198,7 +223,6 @@
             margin-bottom: 24px;
         }
 
-        /* Responsive Filter Tabs */
         .filter-tabs {
             display: flex;
             gap: 20px;
@@ -228,7 +252,6 @@
             color: var(--text-primary);
         }
 
-        /* Portfolio Media Grid System */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -250,7 +273,6 @@
                         border-color 0.4s ease;
         }
 
-        /* Implementation of Recommendation #2: Smooth internal zoom + subtle lift */
         .grid-item:hover {
             transform: translateY(-4px) scale(1.01) !important;
             border-color: rgba(255, 255, 255, 0.18);
@@ -306,7 +328,6 @@
             color: var(--text-primary);
         }
 
-        /* --- IMMERSIVE LIQUID GLASS LIGHTBOX UI COMPONENT --- */
         .lightbox-modal {
             position: fixed;
             top: 0;
@@ -314,7 +335,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(4, 4, 6, 0.75);
-            /* Heavy iOS frosted dynamic glass structural layer */
             backdrop-filter: blur(45px) saturate(220%);
             -webkit-backdrop-filter: blur(45px) saturate(220%);
             z-index: 2000;
@@ -466,21 +486,51 @@
             backdrop-filter: blur(10px);
         }
 
+        .lower-story-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .story-parallax-bg {
+            position: absolute;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 20%, rgba(0,0,0,0.65) 80%, rgba(0,0,0,1) 100%), 
+                        url('https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1920') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+            opacity: 0.52;
+            will-change: transform;
+        }
+
+        .section {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 100px 22px;
+            position: relative;
+            z-index: 5;
+        }
+
         @media (max-width: 767px) {
             .nav-container { padding: 0 16px; }
             nav {
-                max-width: calc(100% - 100px);
+                max-width: calc(100% - 60px);
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
                 gap: 16px;
             }
             nav::-webkit-scrollbar { display: none; }
             .nav-link { padding: 14px 4px; }
-            .section { padding: 80px 16px; }
+            .section.gallery-section { padding: 80px 0; }
+            .gallery-inner-container { padding: 0 16px; }
             .hero-title { letter-spacing: 0.02em; }
+            .hero-parallax-bg { background-attachment: scroll; }
         }
 
-        /* About & Vision Layout */
         .vision-meta {
             font-size: 11px;
             color: var(--text-secondary);
@@ -507,7 +557,6 @@
             color: var(--text-primary);
         }
 
-        /* Service Section Layout */
         .services-section {
             position: relative;
         }
@@ -620,7 +669,7 @@
     <header>
         <div class="nav-container">
             <div class="brand" onclick="window.scrollTo(0,0)"><strong>uzzy</strong>snaps™</div>
-            <nav>
+            <nav style="display: flex; align-items: center; gap: 24px;">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#gallery" class="nav-link">Gallery</a>
                 <a href="#vision" class="nav-link">The Vision</a>
@@ -630,70 +679,70 @@
         </div>
     </header>
 
-    <div id="home" class="hero-container">
+    <div class="upper-showcase-wrapper">
         <div class="hero-parallax-bg" id="heroBg"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">RENAISSANCE & RESONANCE</h1>
-            <p class="hero-subtitle">Photography & Cinematic Videography</p>
-            <p class="hero-established">EST. 026.</p>
+
+        <div id="home" class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">RENAISSANCE & RESONANCE</h1>
+                <p class="hero-subtitle">Photography & Cinematic Videography</p>
+                <p class="hero-established">EST. 026.</p>
+            </div>
         </div>
+
+        <section id="gallery" class="section gallery-section">
+            <div class="gallery-inner-container">
+                <h2 class="section-title">Gallery</h2>
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterGallery('all', this)">All</button>
+                    <button class="tab-btn" onclick="filterGallery('portraits', this)">Portraits</button>
+                    <button class="tab-btn" onclick="filterGallery('nature', this)">Earth & Nature</button>
+                    <button class="tab-btn" onclick="filterGallery('night', this)">Night Photography</button>
+                    <button class="tab-btn" onclick="filterGallery('random', this)">Random</button>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
+                        <img src="https://i.imgur.com/Acl2UrU.jpeg" alt="Portrait by uzzysnaps">
+                        <div class="grid-item-info">
+                            <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-item data-category" data-cat="nature" onclick="openLightbox('nature', 0)">
+                        <img src="https://i.imgur.com/VxFl6dc.jpeg" alt="Earth & Nature by uzzysnaps">
+                        <div class="grid-item-info">
+                            <div class="grid-item-tag">Earth & Nature <span class="tap-hint">View Collection →</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-item data-category" data-cat="night" onclick="openLightbox('night', 0)">
+                        <img src="https://i.imgur.com/qFCZPcP.jpeg" alt="Night Series by uzzysnaps">
+                        <div class="grid-item-info">
+                            <div class="grid-item-tag">Night Series <span class="tap-hint">View Collection →</span></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-item data-category" data-cat="random" onclick="openLightbox('random', 0)">
+                        <img src="https://i.imgur.com/2W7XMf6.jpeg" alt="Random Series by uzzysnaps">
+                        <div class="grid-item-info">
+                            <div class="grid-item-tag">Random Series <span class="tap-hint">View Collection →</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <section id="gallery" class="section">
-        <h2 class="section-title">Gallery</h2>
-        <div class="filter-tabs">
-            <button class="tab-btn active" onclick="filterGallery('all', this)">All</button>
-            <button class="tab-btn" onclick="filterGallery('portraits', this)">Portraits</button>
-            <button class="tab-btn" onclick="filterGallery('nature', this)">Earth & Nature</button>
-            <button class="tab-btn" onclick="filterGallery('night', this)">Night Photography</button>
-            <button class="tab-btn" onclick="filterGallery('random', this)">Random</button>
-        </div>
-
-        <div class="portfolio-grid">
-            <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
-                <img src="https://i.imgur.com/jLoPRqS.jpeg" alt="Portrait by uzzysnaps">
-                <div class="grid-item-info">
-                    <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
-                </div>
-            </div>
-
-            <div class="grid-item data-category" data-cat="nature" onclick="openLightbox('nature', 0)">
-                <img src="https://i.imgur.com/VxFl6dc.jpeg" alt="Earth & Nature by uzzysnaps">
-                <div class="grid-item-info">
-                    <div class="grid-item-tag">Earth & Nature <span class="tap-hint">View Collection →</span></div>
-                </div>
-            </div>
-            
-            <div class="grid-item data-category" data-cat="night" onclick="openLightbox('night', 0)">
-                <img src="https://i.imgur.com/qFCZPcP.jpeg" alt="Night Series by uzzysnaps">
-                <div class="grid-item-info">
-                    <div class="grid-item-tag">Night Series <span class="tap-hint">View Collection →</span></div>
-                </div>
-            </div>
-
-            <div class="grid-item data-category" data-cat="random" onclick="openLightbox('random', 0)">
-                <img src="https://i.imgur.com/2W7XMf6.jpeg" alt="Random Series by uzzysnaps">
-                <div class="grid-item-info">
-                    <div class="grid-item-tag">Random Series <span class="tap-hint">View Collection →</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <div class="lightbox-modal" id="lightboxModal">
         <div class="lightbox-glow-orb-1"></div>
         <div class="lightbox-glow-orb-2"></div>
-
         <button class="lightbox-close-btn" onclick="closeLightbox()">✕</button>
-        
         <button class="lightbox-nav-arrow lightbox-arrow-left" onclick="navigateLightbox(-1)">‹</button>
         <button class="lightbox-nav-arrow lightbox-arrow-right" onclick="navigateLightbox(1)">›</button>
-        
         <div class="lightbox-slider-container" id="lightboxSliderContainer">
-            <div class="lightbox-track" id="lightboxTrack">
-                </div>
+            <div class="lightbox-track" id="lightboxTrack"></div>
         </div>
-        
         <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
     </div>
 
@@ -701,7 +750,6 @@
         <div class="story-parallax-bg" id="storyBg"></div>
 
         <section id="vision" class="section" style="border-top: 1px solid var(--border-subtle);">
-            <!-- Implementation of Recommendation #3: Personal Artist Branding Line -->
             <div class="vision-meta">By Uzzy — Visual Storyteller</div>
             <h2 class="section-title">The Vision</h2>
             <p class="about-text">
@@ -713,22 +761,21 @@
             <div class="liquid-light-1"></div>
             <div class="liquid-light-2"></div>
             
+            <div class="status-badge">
+                <span class="pulse-dot"></span> Available for Bookings Across Delta State
+            </div>
+            
             <h2 class="section-title">Services and Rate</h2>
             <div class="pricing-container">
                 <div class="price-card">
-                    <h3>Essential Session</h3>
-                    <div class="price-tier">$</div>
-                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.5;">Focused framing, standard digital proofs, and tailored creative setups.</p>
+                    <h3>Mobile Photography</h3>
+                    <div class="price-tier">₦</div>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.5;">Focused framing with a high-end phone camera and astonishing edits. Tailored creative setups, executed beautifully either in a studio or outside a studio.</p>
                 </div>
                 <div class="price-card">
-                    <h3>Premium Production</h3>
-                    <div class="price-tier">$$</div>
-                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.5;">Advanced lighting configurations, extensive dynamic coverage, and detailed editing curves.</p>
-                </div>
-                <div class="price-card">
-                    <h3>Cinematic Vanguard</h3>
-                    <div class="price-tier">$$$</div>
-                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.5;">Full-scale visual asset production including ultimate narrative direction and sound mastering grids.</p>
+                    <h3>Digital Photography</h3>
+                    <div class="price-tier">₦₦</div>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.5;">Advanced lighting configurations and extensive dynamic coverage with a <strong>digital camera</strong>. Professional curves and details, available either in a studio or outside a studio.</p>
                 </div>
             </div>
         </section>
@@ -736,7 +783,6 @@
         <section id="contact" class="section" style="border-top: 1px solid var(--border-subtle); text-align: center;">
             <h2 class="section-title">Inquiries</h2>
             <div class="social-row">
-                <!-- Implementation of Recommendation #4: Direct Email Inquiries + Updated TikTok Handles -->
                 <a href="mailto:chibuzorevangel@gmail.com" class="social-icon-link">Email Brief</a>
                 <a href="https://wa.me/+2348080980969" class="social-icon-link" target="_blank">WhatsApp</a>
                 <a href="https://instagram.com" class="social-icon-link" target="_blank">Instagram</a>
@@ -751,19 +797,18 @@
     </div>
 
     <script>
-        const heroBg = document.getElementById('heroBg');
         const storyBg = document.getElementById('storyBg');
         const gridItems = document.querySelectorAll('.grid-item');
         const wrapper = document.querySelector('.lower-story-wrapper');
 
-        // Master Consolidated Photo Database
         const galleryData = {
             portraits: [
+                "https://i.imgur.com/Acl2UrU.jpeg",
                 "https://i.imgur.com/jLoPRqS.jpeg",
                 "https://i.imgur.com/lJ24npb.jpeg",
                 "https://i.imgur.com/yNOyLU7.jpeg", 
-                "https://i.imgur.com/p5AEJhh.jpeg",
-                "https://i.imgur.com/DjtXVmm.jpeg",
+                "https://i.imgur.com/cQWqWkD.jpeg",
+                "https://i.imgur.com/WYeNAje.jpeg", 
                 "https://i.imgur.com/KqlSn26.jpeg"
             ],
             nature: [
@@ -790,7 +835,6 @@
             ]
         };
 
-        // Lightbox State Engine
         let currentActiveCategory = [];
         let currentLightboxIndex = 0;
         
@@ -831,7 +875,6 @@
             counter.innerText = `${currentLightboxIndex + 1} / ${currentActiveCategory.length}`;
         }
 
-        // Touch Gestures Architecture
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -866,7 +909,6 @@
             if (e.key === 'ArrowLeft') navigateLightbox(-1);
         });
 
-        // Filter Grid Control Matrix
         function filterGallery(category, element) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
@@ -883,10 +925,8 @@
             });
         }
 
-        // Scroll Performance Engine
         window.addEventListener('scroll', () => {
             let scrollValue = window.scrollY;
-            if(heroBg) heroBg.style.transform = `translateY(${scrollValue * 0.4}px)`;
 
             let wrapperTop = wrapper.offsetTop;
             if (scrollValue >= (wrapperTop - window.innerHeight)) {
@@ -907,6 +947,5 @@
 
         window.dispatchEvent(new Event('scroll'));
     </script>
-
 </body>
 </html>
