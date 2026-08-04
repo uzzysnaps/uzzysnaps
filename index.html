@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>uzzysnaps™ | RENAISSANCE & RESONANCE</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,7 +74,9 @@
         header {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
+            padding-top: env(safe-area-inset-top, 0px);
             background-color: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
