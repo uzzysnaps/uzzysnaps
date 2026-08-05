@@ -19,7 +19,6 @@
             --text-secondary: #86868b;
             --accent-blue: #0071e3;
             --border-subtle: rgba(255, 255, 255, 0.12);
-            /* Specular highlight rim + deep drop shadow to simulate heavy physical glass */
             --glass-specular: inset 0 1.5px 2px rgba(255, 255, 255, 0.25), 0 12px 40px rgba(0, 0, 0, 0.6);
         }
 
@@ -127,38 +126,41 @@
             color: var(--text-primary);
         }
 
-        /* UNIFIED HERO & GALLERY CONTAINER */
-        .upper-showcase-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            background-color: var(--bg-pure);
-        }
-
-        .hero-parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%; 
-            background: linear-gradient(to bottom, 
-                            rgba(0, 0, 0, 0.45) 0%, 
-                            rgba(0, 0, 0, 0.55) 40%, 
-                            rgba(0, 0, 0, 0.92) 85%, 
-                            rgba(0, 0, 0, 1) 100%), 
-                        url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1920') no-repeat center center;
-            background-size: cover;
-            background-attachment: fixed;
-            z-index: 1;
-        }
-
+        /* --- STRICT HERO HOME SECTION --- */
         .hero-container {
             position: relative;
             height: 100vh;
+            min-height: 600px;
             width: 100%;
             display: flex;
             align-items: center; 
             justify-content: center; 
+            overflow: hidden;
+            background-color: var(--bg-pure);
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            z-index: 1;
+        }
+
+        .hero-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                            rgba(0, 0, 0, 0.35) 0%, 
+                            rgba(0, 0, 0, 0.50) 60%, 
+                            rgba(0, 0, 0, 0.95) 90%, 
+                            rgba(0, 0, 0, 1) 100%);
             z-index: 2;
         }
 
@@ -167,6 +169,7 @@
             position: relative;
             padding: 0 20px;
             width: 100%;
+            z-index: 3;
         }
 
         .hero-title {
@@ -199,13 +202,40 @@
             letter-spacing: 0.15em;
         }
 
-        /* GALLERY SECTION WITH SMOOTH BLUR LAYER */
+        /* --- GALLERY SECTION WITH BLURRED BACKGROUND IMAGE --- */
         .section.gallery-section {
-            max-width: 100%;
-            padding: 100px 0;
             position: relative;
+            width: 100%;
+            padding: 100px 0;
             z-index: 5;
-            background-color: rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            background-color: var(--bg-pure);
+        }
+
+        .gallery-bg-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .gallery-bg-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .gallery-bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Dark overlay combined with backdrop blur for readability */
+            background: rgba(0, 0, 0, 0.72);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
@@ -214,6 +244,8 @@
             max-width: 1024px;
             margin: 0 auto;
             padding: 0 22px;
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
@@ -328,6 +360,7 @@
             color: var(--text-primary);
         }
 
+        /* --- LIGHTBOX MODAL --- */
         .lightbox-modal {
             position: fixed;
             top: 0;
@@ -525,10 +558,10 @@
             }
             nav::-webkit-scrollbar { display: none; }
             .nav-link { padding: 14px 4px; }
-            .section.gallery-section { padding: 80px 0; }
+            .section.gallery-section { padding: 60px 0; }
             .gallery-inner-container { padding: 0 16px; }
             .hero-title { letter-spacing: 0.02em; }
-            .hero-parallax-bg { background-attachment: scroll; }
+            .hero-bg-img { object-position: center 15%; }
         }
 
         .vision-meta {
@@ -669,7 +702,7 @@
     <header>
         <div class="nav-container">
             <div class="brand" onclick="window.scrollTo(0,0)"><strong>uzzy</strong>snaps™</div>
-            <nav style="display: flex; align-items: center; gap: 24px;">
+            <nav>
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#gallery" class="nav-link">Gallery</a>
                 <a href="#vision" class="nav-link">The Vision</a>
@@ -679,60 +712,67 @@
         </div>
     </header>
 
-    <div class="upper-showcase-wrapper">
-        <div class="hero-parallax-bg" id="heroBg"></div>
+    <!-- HERO SECTION -->
+    <div id="home" class="hero-container">
+        <img src="https://i.imgur.com/CQs6qG2.jpeg" alt="Hero background" class="hero-bg-img">
+        <div class="hero-bg-overlay"></div>
 
-        <div id="home" class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">RENAISSANCE & RESONANCE</h1>
-                <p class="hero-subtitle">Photography & Cinematic Videography</p>
-                <p class="hero-established">EST. 026.</p>
-            </div>
+        <div class="hero-content">
+            <h1 class="hero-title">RENAISSANCE & RESONANCE</h1>
+            <p class="hero-subtitle">Photography & Cinematic Videography</p>
+            <p class="hero-established">EST. 026.</p>
         </div>
-
-        <section id="gallery" class="section gallery-section">
-            <div class="gallery-inner-container">
-                <h2 class="section-title">Gallery</h2>
-                <div class="filter-tabs">
-                    <button class="tab-btn active" onclick="filterGallery('all', this)">All</button>
-                    <button class="tab-btn" onclick="filterGallery('portraits', this)">Portraits</button>
-                    <button class="tab-btn" onclick="filterGallery('night', this)">Night Photography</button>
-                    <button class="tab-btn" onclick="filterGallery('random', this)">Random</button>
-                </div>
-
-                <div class="portfolio-grid">
-                    <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
-                        <img src="https://i.imgur.com/Acl2UrU.jpeg" alt="Portrait by uzzysnaps">
-                        <div class="grid-item-info">
-                            <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
-                        </div>
-                    </div>
-
-                    <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 12)">
-                        <img src="https://i.imgur.com/KOLv83P.jpeg" alt="Portrait by uzzysnaps">
-                        <div class="grid-item-info">
-                            <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="grid-item data-category" data-cat="night" onclick="openLightbox('night', 0)">
-                        <img src="https://i.imgur.com/qFCZPcP.jpeg" alt="Night Series by uzzysnaps">
-                        <div class="grid-item-info">
-                            <div class="grid-item-tag">Night Series <span class="tap-hint">View Collection →</span></div>
-                        </div>
-                    </div>
-
-                    <div class="grid-item data-category" data-cat="random" onclick="openLightbox('random', 0)">
-                        <img src="https://i.imgur.com/2W7XMf6.jpeg" alt="Random Series by uzzysnaps">
-                        <div class="grid-item-info">
-                            <div class="grid-item-tag">Random Series <span class="tap-hint">View Collection →</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </div>
 
+    <!-- GALLERY SECTION WITH BLURRED BG IMAGE -->
+    <section id="gallery" class="section gallery-section">
+        <div class="gallery-bg-wrapper">
+            <img src="https://i.imgur.com/CLb4g4q.jpeg" alt="Gallery background" class="gallery-bg-img">
+            <div class="gallery-bg-overlay"></div>
+        </div>
+
+        <div class="gallery-inner-container">
+            <h2 class="section-title">Gallery</h2>
+            <div class="filter-tabs">
+                <button class="tab-btn active" onclick="filterGallery('all', this)">All</button>
+                <button class="tab-btn" onclick="filterGallery('portraits', this)">Portraits</button>
+                <button class="tab-btn" onclick="filterGallery('night', this)">Night Photography</button>
+                <button class="tab-btn" onclick="filterGallery('random', this)">Random</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 0)">
+                    <img src="https://i.imgur.com/Acl2UrU.jpeg" alt="Portrait by uzzysnaps">
+                    <div class="grid-item-info">
+                        <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
+                    </div>
+                </div>
+
+                <div class="grid-item data-category" data-cat="portraits" onclick="openLightbox('portraits', 12)">
+                    <img src="https://i.imgur.com/KOLv83P.jpeg" alt="Portrait by uzzysnaps">
+                    <div class="grid-item-info">
+                        <div class="grid-item-tag">Portraits <span class="tap-hint">View Collection →</span></div>
+                    </div>
+                </div>
+                
+                <div class="grid-item data-category" data-cat="night" onclick="openLightbox('night', 0)">
+                    <img src="https://i.imgur.com/qFCZPcP.jpeg" alt="Night Series by uzzysnaps">
+                    <div class="grid-item-info">
+                        <div class="grid-item-tag">Night Series <span class="tap-hint">View Collection →</span></div>
+                    </div>
+                </div>
+
+                <div class="grid-item data-category" data-cat="random" onclick="openLightbox('random', 0)">
+                    <img src="https://i.imgur.com/2W7XMf6.jpeg" alt="Random Series by uzzysnaps">
+                    <div class="grid-item-info">
+                        <div class="grid-item-tag">Random Series <span class="tap-hint">View Collection →</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
     <div class="lightbox-modal" id="lightboxModal">
         <div class="lightbox-glow-orb-1"></div>
         <div class="lightbox-glow-orb-2"></div>
@@ -745,6 +785,7 @@
         <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
     </div>
 
+    <!-- LOWER CONTENT -->
     <div class="lower-story-wrapper">
         <div class="story-parallax-bg" id="storyBg"></div>
 
@@ -850,7 +891,7 @@
             
             track.innerHTML = currentActiveCategory.map(src => `
                 <div class="lightbox-slide">
-                    <img src="${src}" alt="uzzysnaps premium visual asset production">
+                    <img src="${src}" alt="uzzysnaps visual presentation">
                 </div>
             `).join('');
             
